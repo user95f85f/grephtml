@@ -33,7 +33,7 @@ $output_txt_file_content =~ s/&gt;/>/g;
 $output_txt_file_content =~ s/&lt;/</g;
 $output_txt_file_content =~ s/&amp;/&/g;
 $output_txt_file_content =~ s/^\s+//mg;
-open(my ${txtf}, ">$txt_output_filename") or die $!;
+open(my ${txtf}, ">$txt_output_filename") or die "$!\n$txt_output_filename";
 print ${txtf} $output_txt_file_content;
 close(${txtf});
 
