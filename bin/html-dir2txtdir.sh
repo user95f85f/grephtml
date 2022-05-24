@@ -7,7 +7,7 @@ die(){
 
 create-txt-dir-infrastructure(){
   pushd "$html_dir"
-  find -type d -exec mkdir -p "../$txt_dir/{}" \;
+  find -type d -exec mkdir -p "../$txtdir/{}" \;
   popd
 }
 

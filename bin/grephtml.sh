@@ -44,4 +44,5 @@ txt_file_count="$(find "$search_dir" -type f -name '*.txt' | wc -l)"
 [ -z "$txt_file_count" ] && die 'wtf1'
 [ "$txt_file_count" -eq 0 ] && die "there are no .txt files in the directory '$search_dir'"
 echo "found $txt_file_count TXT files in '$search_dir'"
+find_decent_browser
 egrep -R "$search_string" "$search_dir" | perl -e 'BEGIN{undef $/;} $_=<>;@s=split /\n/;foreach(@s){s/txt/html/;s/txt/html/;s/^/'$browser_could_use' /;} print(join("\n",@s));'
