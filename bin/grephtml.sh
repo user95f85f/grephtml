@@ -38,7 +38,18 @@ HTML_dir="$2"
 [ -d "$HTML_dir" ] || die "directory '$HTML_dir' 0% exists."
 echo "$HTML_dir" | egrep '^[a-zA-Z0-9_ \-]+$' >/dev/null || die "your html directory ($HTML_dir) needs to match /^[a-zA-Z0-9_\\- ]+\$/"
 search_dir="${HTML_dir/html/txt}" #we search in the txt directory with grep
-[ -d "$search_dir" ] || die "you need to run:  html-dir2txtdir.sh '$HTML_dir' for egrep to search in."
+[ -d "$search_dir" ] || {
+  echo "you need to run:  html-dir2txtdir.sh '$HTML_dir' to create text files in directory '$search_dir' for egrep to search in."
+  echo
+  echo "bash html-dir2txtdir.sh '$HTML_dir'"
+  read -n 1 -p "? (Y/n) " myv
+  echo
+
+  case "$myv" in
+    [Yy]|'') html-dir2txtdir.sh "$HTML_dir";;
+    [Nn]*)   exit 0;;
+  esac
+}
 unset HTML_dir
 txt_file_count="$(find "$search_dir" -type f -name '*.txt' | wc -l)"
 [ -z "$txt_file_count" ] && die 'wtf1'
