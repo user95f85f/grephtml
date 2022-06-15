@@ -11,7 +11,7 @@ Voila!
 
 sudo bash install.sh #get the party started.
 cd ~/where/your/html/directory/is/with/html/files
-grephtml.sh 'my search string in egrep format' vim-html-documentation-directory-name
+grephtml 'my search string in egrep format' vim-html-documentation-directory-name
 # you'll get an error, so go:
 html-dir2txtdir.sh vim-html-documentation-directory-name
 # which will generate a 'vim-txt-documentation-directory-name' directory in PWD to use grep on
@@ -22,7 +22,7 @@ grephtml 'my search string in egrep format' vim-html-documentation-directory-nam
 ---------------
 
 #here's an example:
-grephtml.sh :syntax vim-doc-html
+grephtml :syntax vim-doc-html
 found 122 TXT files in 'vim-doc-txt'
 lynx vim-doc-html/gui.html:disabling the Buffers menu must be done before ":syntax on".
 lynx vim-doc-html/gui.html:Note that the menu.vim is sourced when `:syntax on` or `:filetype on` is

@@ -34,7 +34,7 @@ find_decent_browser(){
 
 search_string="$1"
 HTML_dir="$2"
-[ -z "$search_string" -o -z "$HTML_dir" ] && die "grephtml.sh [egrep-search-string] [html-directory]"
+[ -z "$search_string" -o -z "$HTML_dir" ] && die "grephtml [egrep-search-string] [html-directory]"
 [ -d "$HTML_dir" ] || die "directory '$HTML_dir' 0% exists."
 echo "$HTML_dir" | egrep '^[a-zA-Z0-9_ \-]+$' >/dev/null || die "your html directory ($HTML_dir) needs to match /^[a-zA-Z0-9_\\- ]+\$/"
 search_dir="${HTML_dir/html/txt}" #we search in the txt directory with grep
