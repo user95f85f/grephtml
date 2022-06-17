@@ -12,12 +12,17 @@ Voila!
 sudo bash install.sh #get the party started.
 cd ~/where/your/html/directory/is/with/html/files
 grephtml 'my search string in egrep format' vim-html-documentation-directory-name
-# you'll get an error, so go:
-html-dir2txtdir.sh vim-html-documentation-directory-name
+# you'll be asked to execute an automatically-executed `html-dir2txtdir.sh vim-html-documentation-directory-name`
 # which will generate a 'vim-txt-documentation-directory-name' directory in PWD to use grep on
-grephtml 'my search string in egrep format' vim-html-documentation-directory-name
-#works. sweet.
+# the search will commense and future grephtml command of the same arguments won't need to re-execute
+#   `html-dir2txtdir.sh` for that directory again.
 
+
+PROBLEMS:
+there is no option to turn on case-insensitivity searches (ie. egrep "-i")
+However, you could use your custom grep (or whatever) on your '*txt*' directory and then just know there is a '*html*'
+  directory beside it that you can lynx/links/links2/epiphany/firefox/chromium/konqueror open to view.
+(Just replace the .txt extension with .html and the local files should exist within that '*html*' directory)
 
 ---------------
 
