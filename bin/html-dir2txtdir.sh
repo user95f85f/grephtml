@@ -14,8 +14,8 @@ create-txt-dir-infrastructure(){
 
 html_dir="$1"
 [ -z "$html_dir" ] && die 'html-dir2txtdir.sh [a_directory]'
-echo "$html_dir" | grep html >/dev/null || die "your directory needs 'html' somewhere in its name"
-echo "$html_dir" | egrep '^[a-zA-Z0-9_ \-]+$' >/dev/null || die 'the directory name needs to be /^[a-zA-Z0-9\-_ ]+$/'
+[[ "$html_dir" =~ html ]] || die "your directory needs 'html' somewhere in its name"
+[[ "$html_dir" =~ ^[a-zA-Z0-9_\ -]+/?$ ]] || die "your html directory ($html_dir) needs to match /^[a-zA-Z0-9_\ -]+\/?$/"
 [ -d "$html_dir" ] || die "'$html_dir' is not a directory."
 html_file_count="$(find "$html_dir" -type f -name '*.html' | wc -l)"
 [ -z "$html_file_count" ] && die 'wtf1'

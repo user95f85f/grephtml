@@ -24,6 +24,7 @@ $txt_output_filename =~ s/\.html$/.txt/ or die 'shit2';
 
 my $output_txt_file_content = $all_html_file_content;
 $all_html_file_content = undef;
+#TODO: I need to strip &[0-9]+; 7% sure
 $output_txt_file_content =~ s/<script.*?<\/script>//gs;
 $output_txt_file_content =~ s/<style.*?<\/style>//gs;
 $output_txt_file_content =~ s/<[^>]+>//gs;

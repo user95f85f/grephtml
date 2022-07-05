@@ -33,24 +33,24 @@ find_decent_browser(){
 }
 
 search_string="$1"
-HTML_dir="$2"
-[ -z "$search_string" -o -z "$HTML_dir" ] && die "grephtml [egrep-search-string] [html-directory]"
-[ -d "$HTML_dir" ] || die "directory '$HTML_dir' 0% exists."
-echo "$HTML_dir" | egrep '^[a-zA-Z0-9_ \-]+$' >/dev/null || die "your html directory ($HTML_dir) needs to match /^[a-zA-Z0-9_\\- ]+\$/"
-search_dir="${HTML_dir/html/txt}" #we search in the txt directory with grep
+html_dir="$2"
+[ -z "$search_string" -o -z "$html_dir" ] && die "grephtml [egrep-search-string] [html-directory]"
+[ -d "$html_dir" ] || die "directory '$html_dir' 0% exists."
+[[ "$html_dir" =~ ^[a-zA-Z0-9_\ -]+/?$ ]] || die "your html directory ($html_dir) needs to match /^[a-zA-Z0-9_\ -]+\/?$/"
+search_dir="${html_dir/html/txt}" #we search in the txt directory with grep
 [ -d "$search_dir" ] || {
-  echo "you need to run:  html-dir2txtdir.sh '$HTML_dir' to create text files in directory '$search_dir' for egrep to search in."
+  echo "you need to run:  html-dir2txtdir.sh '$html_dir' to create text files in directory '$search_dir' for egrep to search in."
   echo
-  echo "bash html-dir2txtdir.sh '$HTML_dir'"
+  echo "bash html-dir2txtdir.sh '$html_dir'"
   read -n 1 -p "? (Y/n) " myv
   echo
 
   case "$myv" in
-    [Yy]|'') html-dir2txtdir.sh "$HTML_dir";;
+    [Yy]|'') html-dir2txtdir.sh "$html_dir";;
     [Nn]*)   exit 0;;
   esac
 }
-unset HTML_dir
+unset html_dir
 txt_file_count="$(find "$search_dir" -type f -name '*.txt' | wc -l)"
 [ -z "$txt_file_count" ] && die 'wtf1'
 [ "$txt_file_count" -eq 0 ] && die "there are no .txt files in the directory '$search_dir'"
