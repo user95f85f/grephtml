@@ -1,10 +1,12 @@
 #!/bin/bash
 
 echo 'here we go!'
-chmod +x bin/grephtml bin/html-dir2txtdir.sh
-cp -v bin/grephtml bin/html-dir2txtdir.sh /usr/bin/ || {
+
+cp -v bin/grephtml bin/html-dir2txtdir.sh /usr/local/bin/ || {
   echo you gotta run this as root bro
   exit 1
 }
 
-cp -Rv share/grephtml /usr/share/
+chmod +x /usr/local/bin/grephtml /usr/local/bin/html-dir2txtdir.sh
+
+cp -Rv share/grephtml /usr/local/share/

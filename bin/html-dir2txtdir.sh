@@ -27,4 +27,4 @@ mkdir "$txtdir"
 create-txt-dir-infrastructure
 unset txtdir
 
-find "$html_dir" -type f -name '*.html' -exec perl /usr/share/grephtml/html2text-specialized.pl '{}' \;
+find "$html_dir" -type f -name '*.html' -exec perl /usr/local/share/grephtml/html2text-specialized.pl '{}' \;
