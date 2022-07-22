@@ -11,234 +11,243 @@ Voila!
 
 sudo bash install.sh #get the party started.
 cd ~/where/your/html/directory/is/with/html/files
-grephtml 'my search string in egrep format' vim-html-documentation-directory-name
+grephtml 'my search string' vim-html-documentation-directory-name
 # you'll be asked to execute an automatically-executed `html-dir2txtdir.sh vim-html-documentation-directory-name`
-# which will generate a 'vim-txt-documentation-directory-name' directory in PWD to use grep on
+# which will generate a 'vim-txt-documentation-directory-name' directory in PWD to use `grep -E` on
 # the search will commense and future grephtml command of the same arguments won't need to re-execute
 #   `html-dir2txtdir.sh` for that directory again.
 
 
-PROBLEMS:
-there is no option to turn on case-insensitivity searches (ie. egrep "-i")
-However, you could use your custom grep (or whatever) on your '*txt*' directory and then just know there is a '*html*'
-  directory beside it that you can lynx/links/links2/epiphany/firefox/chromium/konqueror open to view.
-(Just replace the .txt extension with .html and the local files should exist within that '*html*' directory)
+ENVIROMENTAL VARIABLES:
+export GREPHTML_GREPPER_EXEC=/usr/bin/ack        #<--this is an example
+export GREPHTML_GREPPER_OPTIONS='-i'             #<--this is an example
+#If these are not set the default searcher is:   /usr/bin/grep --extended-regexp #and of course: --recursive
+
+(AWKWARDNESS) USER-KNOWLEDGE ASSUMPTION:
+Replace the .txt extension with .html (in your search output) and the local files should exist within the grephtml-given '*html*' directory search-directory argument.
 
 ---------------
 
 #here's an example:
-grephtml :syntax vim-doc-html
-found 122 TXT files in 'vim-doc-txt'
-lynx vim-doc-html/gui.html:disabling the Buffers menu must be done before ":syntax on".
-lynx vim-doc-html/gui.html:Note that the menu.vim is sourced when `:syntax on` or `:filetype on` is
-lynx vim-doc-html/tags.html:|:syntax|	syntax.txt
-lynx vim-doc-html/tags.html:|:syntax-enable|	syntax.txt
-lynx vim-doc-html/tags.html:|:syntax-off|	syntax.txt
-lynx vim-doc-html/tags.html:|:syntax-on|	syntax.txt
-lynx vim-doc-html/tags.html:|:syntax-reset|	syntax.txt
-lynx vim-doc-html/tags.html:|g:syntax_on|	syntax.txt
-lynx vim-doc-html/todo.html:The :syntax cchar value can only be a single character.  It would be useful to
-lynx vim-doc-html/todo.html:Patch to add "combine" to :syntax, combines highlight attributes. (Nate
-lynx vim-doc-html/todo.html:Add ":syntax contains {pattern} add=@Spell" command?  A bit like ":syn
-lynx vim-doc-html/todo.html:"&#37;" match.  :syntax nomatch cMatchError (,{,[,),},] [contained]
-lynx vim-doc-html/todo.html:8   Add more command line completion for :syntax.
-lynx vim-doc-html/todo.html:7   Should find a better way to parse the :syntax and :highlight commands.
-lynx vim-doc-html/todo.html:'compatible' after ":syntax on" has been used.
-lynx vim-doc-html/options.html:of 'background' is used (e.g., before ":syntax on").
-lynx vim-doc-html/options.html:done with ":syntax on".
-lynx vim-doc-html/options.html:`:syntax on` and `:filetype on` commands load the menu too).
-lynx vim-doc-html/options.html:syntax highlighting has been switched off with ":syntax off".
-lynx vim-doc-html/usr_90.html::syntax enable
-lynx vim-doc-html/syntax.html:7.  :syntax arguments		|:syn-arguments|
-lynx vim-doc-html/syntax.html:12. Listing syntax items	|:syntax|
-lynx vim-doc-html/syntax.html:*:syn-enable* *:syntax-enable*
-lynx vim-doc-html/syntax.html::syntax enable
-lynx vim-doc-html/syntax.html:*:syn-on* *:syntax-on*
-lynx vim-doc-html/syntax.html:The `:syntax enable` command will keep most of your current color settings.
-lynx vim-doc-html/syntax.html::syntax on
-lynx vim-doc-html/syntax.html::syntax on	" start highlighting, use 'background' to set colors
-lynx vim-doc-html/syntax.html:*g:syntax_on*
-lynx vim-doc-html/syntax.html::if exists("g:syntax_on") | syntax off | else | syntax enable | endif
-lynx vim-doc-html/syntax.html::map <F7> :if exists("g:syntax_on") <Bar>
-lynx vim-doc-html/syntax.html:The ":syntax" commands are implemented by sourcing a file.  To see exactly how
-lynx vim-doc-html/syntax.html::syntax enable	$VIMRUNTIME/syntax/syntax.vim
-lynx vim-doc-html/syntax.html::syntax on		$VIMRUNTIME/syntax/syntax.vim
-lynx vim-doc-html/syntax.html::syntax manual	$VIMRUNTIME/syntax/manual.vim
-lynx vim-doc-html/syntax.html::syntax off		$VIMRUNTIME/syntax/nosyntax.vim
-lynx vim-doc-html/syntax.html:automatically with ":syntax enable", do this:
-lynx vim-doc-html/syntax.html:This explains the details that happen when the command ":syntax enable" is
-lynx vim-doc-html/syntax.html:":syntax enable" and ":syntax on" do the following:
-lynx vim-doc-html/syntax.html:&#124;	&#124;   ":runtime! syntax/syncolor.vim" is used.  ":syntax on" overrules
-lynx vim-doc-html/syntax.html:&#124;	&#124;   existing colors, ":syntax enable" only sets groups that weren't
-lynx vim-doc-html/syntax.html:// vim:syntax=c.doxygen
-lynx vim-doc-html/syntax.html:in your .vimrc prior to the :syntax on command.  If you always use fixed source
-lynx vim-doc-html/syntax.html:in your .vimrc prior to the :syntax on command.
-lynx vim-doc-html/syntax.html:placed prior to the :syntax on command.  Unfortunately, the use of tabs will
-lynx vim-doc-html/syntax.html:This defines if the following ":syntax" commands will work with
-lynx vim-doc-html/syntax.html:items until the next ":syntax case" command are affected.
-lynx vim-doc-html/syntax.html::syntax iskeyword @,48-57,192-255,$,_
-lynx vim-doc-html/syntax.html::syntax keyword   Type   int long char
-lynx vim-doc-html/syntax.html::syntax keyword   Type   contained int long char
-lynx vim-doc-html/syntax.html::syntax keyword   Type   int long contained char
-lynx vim-doc-html/syntax.html::syntax keyword   Type   int long char contained
-lynx vim-doc-html/syntax.html::syntax keyword   vimCommand	 ab[breviate] n[ext]
-lynx vim-doc-html/syntax.html::syntax match Character /'.'/hs=s+1,he=e-1
-lynx vim-doc-html/syntax.html::syntax region String   start=+"+  skip=+\\"+  end=+"+
-lynx vim-doc-html/syntax.html::syntax region String matchgroup=Quote start=+"+  skip=+\\"+	end=+"+
-lynx vim-doc-html/syntax.html:7. :syntax arguments					*:syn-arguments*
-lynx vim-doc-html/syntax.html:The :syntax commands that define syntax items take a number of arguments.
-lynx vim-doc-html/syntax.html::syntax keyword		 -	 -	 -	 -	 -      -
-lynx vim-doc-html/syntax.html::syntax match		yes	 -	yes	yes	yes     -
-lynx vim-doc-html/syntax.html::syntax region		yes	yes	yes	yes	yes    yes
-lynx vim-doc-html/syntax.html::syntax match Entity "&amp;" conceal cchar=&
-lynx vim-doc-html/syntax.html::syntax keyword Todo    TODO    contained
-lynx vim-doc-html/syntax.html::syntax match   Comment "//.*"  contains=Todo
-lynx vim-doc-html/syntax.html::syntax region Block start="{" end="}" ... contains=ALLBUT,Function
-lynx vim-doc-html/syntax.html::syntax match  ccFoobar  "Foo.\{-}Bar"  contains=ccFoo
-lynx vim-doc-html/syntax.html::syntax match  ccFoo     "Foo"	    contained nextgroup=ccFiller
-lynx vim-doc-html/syntax.html::syntax region ccFiller  start="."  matchgroup=ccBar  end="Bar"  contained
-lynx vim-doc-html/syntax.html:This defines if the following ":syntax" commands will define keywords,
-lynx vim-doc-html/syntax.html::syntax region Comment  start="/\*"  end="\*/"
-lynx vim-doc-html/syntax.html::syntax region String   start=+"+    end=+"+	 skip=+\\"+
-lynx vim-doc-html/syntax.html::syntax region Comment start="/\*"hs=e+1 end="\*/"he=s-1
-lynx vim-doc-html/syntax.html::syntax match Thing "# [^#]\+ #" contains=@ThingMembers
-lynx vim-doc-html/syntax.html::syntax cluster ThingMembers contains=ThingMember1,ThingMember2
-lynx vim-doc-html/syntax.html::syntax keyword A aaa
-lynx vim-doc-html/syntax.html::syntax keyword B bbb
-lynx vim-doc-html/syntax.html::syntax cluster AandB contains=A
-lynx vim-doc-html/syntax.html::syntax match Stuff "( aaa bbb )" contains=@AandB
-lynx vim-doc-html/syntax.html::syntax cluster AandB add=B	  " now both keywords are matched in Stuff
-lynx vim-doc-html/syntax.html::syntax keyword A aaa
-lynx vim-doc-html/syntax.html::syntax keyword B bbb
-lynx vim-doc-html/syntax.html::syntax cluster SmallGroup contains=B
-lynx vim-doc-html/syntax.html::syntax cluster BigGroup contains=A,@SmallGroup
-lynx vim-doc-html/syntax.html::syntax match Stuff "( aaa bbb )" contains=@BigGroup
-lynx vim-doc-html/syntax.html::syntax cluster BigGroup remove=B	" no effect, since B isn't in BigGroup
-lynx vim-doc-html/syntax.html::syntax cluster SmallGroup remove=B	" now bbb isn't matched within Stuff
-lynx vim-doc-html/syntax.html:":syntax include" command:
-lynx vim-doc-html/syntax.html::syntax include @Pod <sfile>:p:h/pod.vim
-lynx vim-doc-html/syntax.html::syntax region perlPOD start="^=head" end="^=cut" contains=@Pod
-lynx vim-doc-html/syntax.html::syntax sync maxlines=500 ccomment
-lynx vim-doc-html/syntax.html::syntax sync linebreaks=1
-lynx vim-doc-html/syntax.html::syntax sync fromstart
-lynx vim-doc-html/syntax.html::syntax sync ccomment
-lynx vim-doc-html/syntax.html::syntax sync ccomment javaComment
-lynx vim-doc-html/syntax.html::syntax sync minlines=50
-lynx vim-doc-html/syntax.html::syntax sync match {sync-group-name} grouphere {group-name} "pattern" ..
-lynx vim-doc-html/syntax.html::syntax sync match {sync-group-name} groupthere {group-name} "pattern" ..
-lynx vim-doc-html/syntax.html::syntax sync match ..
-lynx vim-doc-html/syntax.html::syntax sync region ..
-lynx vim-doc-html/syntax.html::syntax sync linecont {pattern}
-lynx vim-doc-html/syntax.html::syntax sync maxlines=100
-lynx vim-doc-html/syntax.html::syntax sync clear
-lynx vim-doc-html/syntax.html::syntax sync clear {sync-group-name} ..
-lynx vim-doc-html/syntax.html:12. Listing syntax items		*:syntax* *:sy* *:syn* *:syn-list*
-lynx vim-doc-html/syntax.html:See above for other arguments for the ":syntax" command.
-lynx vim-doc-html/syntax.html:Note that the ":syntax" command can be abbreviated to ":sy", although ":syn"
-lynx vim-doc-html/syntax.html::syntax clear
-lynx vim-doc-html/syntax.html::syntax clear {group-name} ..
-lynx vim-doc-html/syntax.html::syntax clear @{grouplist-name} ..
-lynx vim-doc-html/syntax.html:*:syntax-off* *:syn-off*
-lynx vim-doc-html/syntax.html::syntax off
-lynx vim-doc-html/syntax.html:*:syntax-reset* *:syn-reset*
-lynx vim-doc-html/syntax.html::syntax reset
-lynx vim-doc-html/syntax.html:let g:syntax_cmd = "reset"
-lynx vim-doc-html/syntax.html:the default colors.  This way these colors will be used after the ":syntax
-lynx vim-doc-html/syntax.html:"on"		":syntax on" command.  Highlight colors are overruled but
-lynx vim-doc-html/syntax.html:"enable"	":syntax enable" command.  Only define colors for groups that
-lynx vim-doc-html/syntax.html:don't have highlighting yet.  Use ":syntax default".
-lynx vim-doc-html/syntax.html:"reset"	":syntax reset" command or loading a color scheme.  Define all
-lynx vim-doc-html/syntax.html:on the same buffer (including :syntax clear) have no effect. Conversely,
-lynx vim-doc-html/syntax.html:Note: Do these settings BEFORE doing ":syntax on".  Otherwise the colors may
-lynx vim-doc-html/vimindex.html:|:syntax|	:sy[ntax]	syntax highlighting
-lynx vim-doc-html/filetype.html:The file types are also used for syntax highlighting.  If the ":syntax on"
-lynx vim-doc-html/filetype.html:to do ":filetype on" after ":syntax on".
-lynx vim-doc-html/usr_44.html::syntax clear
-lynx vim-doc-html/usr_44.html::syntax
-lynx vim-doc-html/usr_44.html::syntax list {group-name}
-lynx vim-doc-html/usr_44.html::syntax case match
-lynx vim-doc-html/usr_44.html::syntax case ignore
-lynx vim-doc-html/usr_44.html:The ":syntax case" commands can appear anywhere in a syntax file and affect
-lynx vim-doc-html/usr_44.html:the syntax definitions that follow.  In most cases, you have only one ":syntax
-lynx vim-doc-html/usr_44.html:scatter the ":syntax case" command throughout the file.
-lynx vim-doc-html/usr_44.html::syntax keyword {group} {keyword} ...
-lynx vim-doc-html/usr_44.html::syntax keyword xType int long char
-lynx vim-doc-html/usr_44.html::syntax keyword xStatement if then else endif
-lynx vim-doc-html/usr_44.html::syntax keyword xStatement when-not
-lynx vim-doc-html/usr_44.html::syntax keyword xStatement n[ext]
-lynx vim-doc-html/usr_44.html::syntax match xIdentifier /\<\l\+\>/
-lynx vim-doc-html/usr_44.html:"then", etc., will be keywords, as defined with the ":syntax keyword"
-lynx vim-doc-html/usr_44.html::syntax match xComment /#.*/
-lynx vim-doc-html/usr_44.html::syntax region xString start=/"/ end=/"/
-lynx vim-doc-html/usr_44.html::syntax region xString start=/"/ skip=/\\"/ end=/"/
-lynx vim-doc-html/usr_44.html::syntax keyword xTodo TODO contained
-lynx vim-doc-html/usr_44.html::syntax match xComment /%.*/ contains=xTodo
-lynx vim-doc-html/usr_44.html::syntax region xBlock start=/{/ end=/}/ contains=xBlock
-lynx vim-doc-html/usr_44.html::syntax region xComment start=/%/ end=/$/ contained
-lynx vim-doc-html/usr_44.html::syntax region xPreProc start=/#/ end=/$/ contains=xComment
-lynx vim-doc-html/usr_44.html::syntax region xComment start=/%/ end=/$/ contained
-lynx vim-doc-html/usr_44.html::syntax region xPreProc start=/#/ end=/$/ contains=xComment keepend
-lynx vim-doc-html/usr_44.html::syntax region xList start=/\[/ end=/\]/ contains=ALL
-lynx vim-doc-html/usr_44.html::syntax region xList start=/\[/ end=/\]/ contains=ALLBUT,xString
-lynx vim-doc-html/usr_44.html::syntax match xIf /if/ nextgroup=xIfCondition skipwhite
-lynx vim-doc-html/usr_44.html::syntax match xIfCondition /([^)]*)/ contained nextgroup=xThen skipwhite
-lynx vim-doc-html/usr_44.html::syntax match xThen /then/ contained
-lynx vim-doc-html/usr_44.html::syntax region xInside start=/(/ end=/)/
-lynx vim-doc-html/usr_44.html::syntax region xInside matchgroup=xParen start=/(/ end=/)/
-lynx vim-doc-html/usr_44.html::syntax region xInside matchgroup=xParen start=/(/
-lynx vim-doc-html/usr_44.html::syntax region cWhile matchgroup=cWhile start=/while\s*(/ end=/)/
-lynx vim-doc-html/usr_44.html::syntax region cFor matchgroup=cFor start=/for\s*(/ end=/)/
-lynx vim-doc-html/usr_44.html::syntax region cCondNest start=/(/ end=/)/ contained transparent
-lynx vim-doc-html/usr_44.html::syntax region xCond start=/if\s*(/ms=e+1 end=/)/me=s-1
-lynx vim-doc-html/usr_44.html::syntax region xIfThen start=/if/ end=/then/ oneline
-lynx vim-doc-html/usr_44.html::syntax region xPreProc start=/^#/ end=/$/ contains=xLineContinue
-lynx vim-doc-html/usr_44.html::syntax match xLineContinue "\\$" contained
-lynx vim-doc-html/usr_44.html::syntax region xPreProc start=/^#/ end=/$/
-lynx vim-doc-html/usr_44.html::syntax match xPreProcEnd excludenl /end$/ contained
-lynx vim-doc-html/usr_44.html::syntax match xLineContinue "\\$" contained
-lynx vim-doc-html/usr_44.html::syntax match xFor /^for.*/ contains=xNumber,xIdent
-lynx vim-doc-html/usr_44.html::syntax match xIf /^if.*/ contains=xNumber,xIdent
-lynx vim-doc-html/usr_44.html::syntax match xWhile /^while.*/ contains=xNumber,xIdent
-lynx vim-doc-html/usr_44.html::syntax cluster xState contains=xNumber,xIdent
-lynx vim-doc-html/usr_44.html::syntax match xFor /^for.*/ contains=@xState
-lynx vim-doc-html/usr_44.html::syntax match xIf /^if.*/ contains=@xState
-lynx vim-doc-html/usr_44.html::syntax match xWhile /^while.*/ contains=@xState
-lynx vim-doc-html/usr_44.html::syntax cluster xState add=xString
-lynx vim-doc-html/usr_44.html::syntax cluster xState remove=xNumber
-lynx vim-doc-html/usr_44.html::syntax keyword cppStatement	new delete this friend using
-lynx vim-doc-html/usr_44.html:syntax file.  The ":syntax include" command reads in a syntax file and stores
-lynx vim-doc-html/usr_44.html::syntax include @Pod <sfile>:p:h/pod.vim
-lynx vim-doc-html/usr_44.html::syntax region perlPOD start=/^=head/ end=/^=cut/ contains=@Pod
-lynx vim-doc-html/usr_44.html:The ":syntax include" command is clever enough to ignore a ":syntax clear"
-lynx vim-doc-html/usr_44.html:The secret is the ":syntax sync" command.  This tells Vim how to figure out
-lynx vim-doc-html/usr_44.html::syntax sync ccomment
-lynx vim-doc-html/usr_44.html::syntax sync ccomment minlines=10 maxlines=500
-lynx vim-doc-html/usr_44.html::syntax sync ccomment xAltComment
-lynx vim-doc-html/usr_44.html::syntax sync minlines=150
-lynx vim-doc-html/usr_44.html::syntax sync match {sync-group-name}
-lynx vim-doc-html/usr_44.html::syntax sync match shIfSync grouphere shIf "\<if\>"
-lynx vim-doc-html/usr_44.html::syntax sync match shIfSync groupthere NONE "\<fi\>"
-lynx vim-doc-html/usr_44.html::syntax sync match xSpecial /{.*}/
-lynx vim-doc-html/usr_44.html::syntax keyword cType off_t uint
-lynx vim-doc-html/starting.html:and ":syntax on" are not included.  Things like register contents and
-lynx vim-doc-html/usr_06.html::syntax enable
-lynx vim-doc-html/usr_06.html:If you always want to use syntax highlighting, put the ":syntax enable"
-lynx vim-doc-html/usr_06.html:If you want syntax highlighting only in the GUI version, put the ":syntax
-lynx vim-doc-html/usr_06.html:Make sure you put this _before_ the ":syntax enable" command,
-lynx vim-doc-html/usr_06.html:":syntax reset" after setting 'background' to make Vim set the default
-lynx vim-doc-html/usr_06.html::syntax clear
-lynx vim-doc-html/usr_06.html::syntax off
-lynx vim-doc-html/usr_06.html:all buffers.  See |:syntax-off| for more details.
-lynx vim-doc-html/usr_06.html::syntax manual
-lynx vim-doc-html/quickref.html:|:syn-on|	:syntax on		start using syntax highlighting
-lynx vim-doc-html/quickref.html:|:syn-off|	:syntax off		stop using syntax highlighting
-lynx vim-doc-html/quickref.html:|:syn-keyword|	:syntax keyword {group-name} {keyword} ..
-lynx vim-doc-html/quickref.html:|:syn-match|	:syntax match {group-name} {pattern} ...
-lynx vim-doc-html/quickref.html:|:syn-region|	:syntax region {group-name} {pattern} ...
-lynx vim-doc-html/quickref.html:|:syn-sync|	:syntax sync [ccomment &#124; lines {N} &#124; ...]
-lynx vim-doc-html/quickref.html:|:syntax|	:syntax [list]		list current syntax items
-lynx vim-doc-html/quickref.html:|:syn-clear|	:syntax clear		clear all syntax info
-lynx vim-doc-html/cmdline.html::syntax
-lynx vim-doc-html/insert.html:":syntax list" while editing a PHP file I can see some of these entries:
-lynx vim-doc-html/insert.html:SQL file (:e syntax.sql) you can use the ":syntax list" command to see the
-lynx vim-doc-html/ft_sql.html::syntax list
+unset GREPHTML_GREPPER_EXEC GREPHTML_GREPPER_OPTIONS; grephtml :syntax vim-doc-html
+you need to run:  html-dir2txtdir.sh 'doc-vim-html/' to create text files in directory 'doc-vim-txt/' for egrep to search in.
+
+bash html-dir2txtdir.sh 'doc-vim-html/'
+
+found 122 HTML files in 'doc-vim-html/'
+~/Documents/doc-vim-html ~/Documents
+~/Documents
+found 122 TXT files in 'doc-vim-txt/'
+`grep -ER  :syntax doc-vim-txt/`doc-vim-txt/gui.txt:disabling the Buffers menu must be done before ":syntax on".
+doc-vim-txt/gui.txt:Note that the menu.vim is sourced when `:syntax on` or `:filetype on` is
+doc-vim-txt/tags.txt:|:syntax|	syntax.txt
+doc-vim-txt/tags.txt:|:syntax-enable|	syntax.txt
+doc-vim-txt/tags.txt:|:syntax-off|	syntax.txt
+doc-vim-txt/tags.txt:|:syntax-on|	syntax.txt
+doc-vim-txt/tags.txt:|:syntax-reset|	syntax.txt
+doc-vim-txt/tags.txt:|g:syntax_on|	syntax.txt
+doc-vim-txt/todo.txt:The :syntax cchar value can only be a single character.  It would be useful to
+doc-vim-txt/todo.txt:Patch to add "combine" to :syntax, combines highlight attributes. (Nate
+doc-vim-txt/todo.txt:Add ":syntax contains {pattern} add=@Spell" command?  A bit like ":syn
+doc-vim-txt/todo.txt:"&#37;" match.  :syntax nomatch cMatchError (,{,[,),},] [contained]
+doc-vim-txt/todo.txt:8   Add more command line completion for :syntax.
+doc-vim-txt/todo.txt:7   Should find a better way to parse the :syntax and :highlight commands.
+doc-vim-txt/todo.txt:'compatible' after ":syntax on" has been used.
+doc-vim-txt/options.txt:of 'background' is used (e.g., before ":syntax on").
+doc-vim-txt/options.txt:done with ":syntax on".
+doc-vim-txt/options.txt:`:syntax on` and `:filetype on` commands load the menu too).
+doc-vim-txt/options.txt:syntax highlighting has been switched off with ":syntax off".
+doc-vim-txt/usr_90.txt::syntax enable
+doc-vim-txt/syntax.txt:7.  :syntax arguments		|:syn-arguments|
+doc-vim-txt/syntax.txt:12. Listing syntax items	|:syntax|
+doc-vim-txt/syntax.txt:*:syn-enable* *:syntax-enable*
+doc-vim-txt/syntax.txt::syntax enable
+doc-vim-txt/syntax.txt:*:syn-on* *:syntax-on*
+doc-vim-txt/syntax.txt:The `:syntax enable` command will keep most of your current color settings.
+doc-vim-txt/syntax.txt::syntax on
+doc-vim-txt/syntax.txt::syntax on	" start highlighting, use 'background' to set colors
+doc-vim-txt/syntax.txt:*g:syntax_on*
+doc-vim-txt/syntax.txt::if exists("g:syntax_on") | syntax off | else | syntax enable | endif
+doc-vim-txt/syntax.txt::map <F7> :if exists("g:syntax_on") <Bar>
+doc-vim-txt/syntax.txt:The ":syntax" commands are implemented by sourcing a file.  To see exactly how
+doc-vim-txt/syntax.txt::syntax enable	$VIMRUNTIME/syntax/syntax.vim
+doc-vim-txt/syntax.txt::syntax on		$VIMRUNTIME/syntax/syntax.vim
+doc-vim-txt/syntax.txt::syntax manual	$VIMRUNTIME/syntax/manual.vim
+doc-vim-txt/syntax.txt::syntax off		$VIMRUNTIME/syntax/nosyntax.vim
+doc-vim-txt/syntax.txt:automatically with ":syntax enable", do this:
+doc-vim-txt/syntax.txt:This explains the details that happen when the command ":syntax enable" is
+doc-vim-txt/syntax.txt:":syntax enable" and ":syntax on" do the following:
+doc-vim-txt/syntax.txt:&#124;	&#124;   ":runtime! syntax/syncolor.vim" is used.  ":syntax on" overrules
+doc-vim-txt/syntax.txt:&#124;	&#124;   existing colors, ":syntax enable" only sets groups that weren't
+doc-vim-txt/syntax.txt:// vim:syntax=c.doxygen
+doc-vim-txt/syntax.txt:in your .vimrc prior to the :syntax on command.  If you always use fixed source
+doc-vim-txt/syntax.txt:in your .vimrc prior to the :syntax on command.
+doc-vim-txt/syntax.txt:placed prior to the :syntax on command.  Unfortunately, the use of tabs will
+doc-vim-txt/syntax.txt:This defines if the following ":syntax" commands will work with
+doc-vim-txt/syntax.txt:items until the next ":syntax case" command are affected.
+doc-vim-txt/syntax.txt::syntax iskeyword @,48-57,192-255,$,_
+doc-vim-txt/syntax.txt::syntax keyword   Type   int long char
+doc-vim-txt/syntax.txt::syntax keyword   Type   contained int long char
+doc-vim-txt/syntax.txt::syntax keyword   Type   int long contained char
+doc-vim-txt/syntax.txt::syntax keyword   Type   int long char contained
+doc-vim-txt/syntax.txt::syntax keyword   vimCommand	 ab[breviate] n[ext]
+doc-vim-txt/syntax.txt::syntax match Character /'.'/hs=s+1,he=e-1
+doc-vim-txt/syntax.txt::syntax region String   start=+"+  skip=+\\"+  end=+"+
+doc-vim-txt/syntax.txt::syntax region String matchgroup=Quote start=+"+  skip=+\\"+	end=+"+
+doc-vim-txt/syntax.txt:7. :syntax arguments					*:syn-arguments*
+doc-vim-txt/syntax.txt:The :syntax commands that define syntax items take a number of arguments.
+doc-vim-txt/syntax.txt::syntax keyword		 -	 -	 -	 -	 -      -
+doc-vim-txt/syntax.txt::syntax match		yes	 -	yes	yes	yes     -
+doc-vim-txt/syntax.txt::syntax region		yes	yes	yes	yes	yes    yes
+doc-vim-txt/syntax.txt::syntax match Entity "&amp;" conceal cchar=&
+doc-vim-txt/syntax.txt::syntax keyword Todo    TODO    contained
+doc-vim-txt/syntax.txt::syntax match   Comment "//.*"  contains=Todo
+doc-vim-txt/syntax.txt::syntax region Block start="{" end="}" ... contains=ALLBUT,Function
+doc-vim-txt/syntax.txt::syntax match  ccFoobar  "Foo.\{-}Bar"  contains=ccFoo
+doc-vim-txt/syntax.txt::syntax match  ccFoo     "Foo"	    contained nextgroup=ccFiller
+doc-vim-txt/syntax.txt::syntax region ccFiller  start="."  matchgroup=ccBar  end="Bar"  contained
+doc-vim-txt/syntax.txt:This defines if the following ":syntax" commands will define keywords,
+doc-vim-txt/syntax.txt::syntax region Comment  start="/\*"  end="\*/"
+doc-vim-txt/syntax.txt::syntax region String   start=+"+    end=+"+	 skip=+\\"+
+doc-vim-txt/syntax.txt::syntax region Comment start="/\*"hs=e+1 end="\*/"he=s-1
+doc-vim-txt/syntax.txt::syntax match Thing "# [^#]\+ #" contains=@ThingMembers
+doc-vim-txt/syntax.txt::syntax cluster ThingMembers contains=ThingMember1,ThingMember2
+doc-vim-txt/syntax.txt::syntax keyword A aaa
+doc-vim-txt/syntax.txt::syntax keyword B bbb
+doc-vim-txt/syntax.txt::syntax cluster AandB contains=A
+doc-vim-txt/syntax.txt::syntax match Stuff "( aaa bbb )" contains=@AandB
+doc-vim-txt/syntax.txt::syntax cluster AandB add=B	  " now both keywords are matched in Stuff
+doc-vim-txt/syntax.txt::syntax keyword A aaa
+doc-vim-txt/syntax.txt::syntax keyword B bbb
+doc-vim-txt/syntax.txt::syntax cluster SmallGroup contains=B
+doc-vim-txt/syntax.txt::syntax cluster BigGroup contains=A,@SmallGroup
+doc-vim-txt/syntax.txt::syntax match Stuff "( aaa bbb )" contains=@BigGroup
+doc-vim-txt/syntax.txt::syntax cluster BigGroup remove=B	" no effect, since B isn't in BigGroup
+doc-vim-txt/syntax.txt::syntax cluster SmallGroup remove=B	" now bbb isn't matched within Stuff
+doc-vim-txt/syntax.txt:":syntax include" command:
+doc-vim-txt/syntax.txt::syntax include @Pod <sfile>:p:h/pod.vim
+doc-vim-txt/syntax.txt::syntax region perlPOD start="^=head" end="^=cut" contains=@Pod
+doc-vim-txt/syntax.txt::syntax sync maxlines=500 ccomment
+doc-vim-txt/syntax.txt::syntax sync linebreaks=1
+doc-vim-txt/syntax.txt::syntax sync fromstart
+doc-vim-txt/syntax.txt::syntax sync ccomment
+doc-vim-txt/syntax.txt::syntax sync ccomment javaComment
+doc-vim-txt/syntax.txt::syntax sync minlines=50
+doc-vim-txt/syntax.txt::syntax sync match {sync-group-name} grouphere {group-name} "pattern" ..
+doc-vim-txt/syntax.txt::syntax sync match {sync-group-name} groupthere {group-name} "pattern" ..
+doc-vim-txt/syntax.txt::syntax sync match ..
+doc-vim-txt/syntax.txt::syntax sync region ..
+doc-vim-txt/syntax.txt::syntax sync linecont {pattern}
+doc-vim-txt/syntax.txt::syntax sync maxlines=100
+doc-vim-txt/syntax.txt::syntax sync clear
+doc-vim-txt/syntax.txt::syntax sync clear {sync-group-name} ..
+doc-vim-txt/syntax.txt:12. Listing syntax items		*:syntax* *:sy* *:syn* *:syn-list*
+doc-vim-txt/syntax.txt:See above for other arguments for the ":syntax" command.
+doc-vim-txt/syntax.txt:Note that the ":syntax" command can be abbreviated to ":sy", although ":syn"
+doc-vim-txt/syntax.txt::syntax clear
+doc-vim-txt/syntax.txt::syntax clear {group-name} ..
+doc-vim-txt/syntax.txt::syntax clear @{grouplist-name} ..
+doc-vim-txt/syntax.txt:*:syntax-off* *:syn-off*
+doc-vim-txt/syntax.txt::syntax off
+doc-vim-txt/syntax.txt:*:syntax-reset* *:syn-reset*
+doc-vim-txt/syntax.txt::syntax reset
+doc-vim-txt/syntax.txt:let g:syntax_cmd = "reset"
+doc-vim-txt/syntax.txt:the default colors.  This way these colors will be used after the ":syntax
+doc-vim-txt/syntax.txt:"on"		":syntax on" command.  Highlight colors are overruled but
+doc-vim-txt/syntax.txt:"enable"	":syntax enable" command.  Only define colors for groups that
+doc-vim-txt/syntax.txt:don't have highlighting yet.  Use ":syntax default".
+doc-vim-txt/syntax.txt:"reset"	":syntax reset" command or loading a color scheme.  Define all
+doc-vim-txt/syntax.txt:on the same buffer (including :syntax clear) have no effect. Conversely,
+doc-vim-txt/syntax.txt:Note: Do these settings BEFORE doing ":syntax on".  Otherwise the colors may
+doc-vim-txt/vimindex.txt:|:syntax|	:sy[ntax]	syntax highlighting
+doc-vim-txt/filetype.txt:The file types are also used for syntax highlighting.  If the ":syntax on"
+doc-vim-txt/filetype.txt:to do ":filetype on" after ":syntax on".
+doc-vim-txt/usr_44.txt::syntax clear
+doc-vim-txt/usr_44.txt::syntax
+doc-vim-txt/usr_44.txt::syntax list {group-name}
+doc-vim-txt/usr_44.txt::syntax case match
+doc-vim-txt/usr_44.txt::syntax case ignore
+doc-vim-txt/usr_44.txt:The ":syntax case" commands can appear anywhere in a syntax file and affect
+doc-vim-txt/usr_44.txt:the syntax definitions that follow.  In most cases, you have only one ":syntax
+doc-vim-txt/usr_44.txt:scatter the ":syntax case" command throughout the file.
+doc-vim-txt/usr_44.txt::syntax keyword {group} {keyword} ...
+doc-vim-txt/usr_44.txt::syntax keyword xType int long char
+doc-vim-txt/usr_44.txt::syntax keyword xStatement if then else endif
+doc-vim-txt/usr_44.txt::syntax keyword xStatement when-not
+doc-vim-txt/usr_44.txt::syntax keyword xStatement n[ext]
+doc-vim-txt/usr_44.txt::syntax match xIdentifier /\<\l\+\>/
+doc-vim-txt/usr_44.txt:"then", etc., will be keywords, as defined with the ":syntax keyword"
+doc-vim-txt/usr_44.txt::syntax match xComment /#.*/
+doc-vim-txt/usr_44.txt::syntax region xString start=/"/ end=/"/
+doc-vim-txt/usr_44.txt::syntax region xString start=/"/ skip=/\\"/ end=/"/
+doc-vim-txt/usr_44.txt::syntax keyword xTodo TODO contained
+doc-vim-txt/usr_44.txt::syntax match xComment /%.*/ contains=xTodo
+doc-vim-txt/usr_44.txt::syntax region xBlock start=/{/ end=/}/ contains=xBlock
+doc-vim-txt/usr_44.txt::syntax region xComment start=/%/ end=/$/ contained
+doc-vim-txt/usr_44.txt::syntax region xPreProc start=/#/ end=/$/ contains=xComment
+doc-vim-txt/usr_44.txt::syntax region xComment start=/%/ end=/$/ contained
+doc-vim-txt/usr_44.txt::syntax region xPreProc start=/#/ end=/$/ contains=xComment keepend
+doc-vim-txt/usr_44.txt::syntax region xList start=/\[/ end=/\]/ contains=ALL
+doc-vim-txt/usr_44.txt::syntax region xList start=/\[/ end=/\]/ contains=ALLBUT,xString
+doc-vim-txt/usr_44.txt::syntax match xIf /if/ nextgroup=xIfCondition skipwhite
+doc-vim-txt/usr_44.txt::syntax match xIfCondition /([^)]*)/ contained nextgroup=xThen skipwhite
+doc-vim-txt/usr_44.txt::syntax match xThen /then/ contained
+doc-vim-txt/usr_44.txt::syntax region xInside start=/(/ end=/)/
+doc-vim-txt/usr_44.txt::syntax region xInside matchgroup=xParen start=/(/ end=/)/
+doc-vim-txt/usr_44.txt::syntax region xInside matchgroup=xParen start=/(/
+doc-vim-txt/usr_44.txt::syntax region cWhile matchgroup=cWhile start=/while\s*(/ end=/)/
+doc-vim-txt/usr_44.txt::syntax region cFor matchgroup=cFor start=/for\s*(/ end=/)/
+doc-vim-txt/usr_44.txt::syntax region cCondNest start=/(/ end=/)/ contained transparent
+doc-vim-txt/usr_44.txt::syntax region xCond start=/if\s*(/ms=e+1 end=/)/me=s-1
+doc-vim-txt/usr_44.txt::syntax region xIfThen start=/if/ end=/then/ oneline
+doc-vim-txt/usr_44.txt::syntax region xPreProc start=/^#/ end=/$/ contains=xLineContinue
+doc-vim-txt/usr_44.txt::syntax match xLineContinue "\\$" contained
+doc-vim-txt/usr_44.txt::syntax region xPreProc start=/^#/ end=/$/
+doc-vim-txt/usr_44.txt::syntax match xPreProcEnd excludenl /end$/ contained
+doc-vim-txt/usr_44.txt::syntax match xLineContinue "\\$" contained
+doc-vim-txt/usr_44.txt::syntax match xFor /^for.*/ contains=xNumber,xIdent
+doc-vim-txt/usr_44.txt::syntax match xIf /^if.*/ contains=xNumber,xIdent
+doc-vim-txt/usr_44.txt::syntax match xWhile /^while.*/ contains=xNumber,xIdent
+doc-vim-txt/usr_44.txt::syntax cluster xState contains=xNumber,xIdent
+doc-vim-txt/usr_44.txt::syntax match xFor /^for.*/ contains=@xState
+doc-vim-txt/usr_44.txt::syntax match xIf /^if.*/ contains=@xState
+doc-vim-txt/usr_44.txt::syntax match xWhile /^while.*/ contains=@xState
+doc-vim-txt/usr_44.txt::syntax cluster xState add=xString
+doc-vim-txt/usr_44.txt::syntax cluster xState remove=xNumber
+doc-vim-txt/usr_44.txt::syntax keyword cppStatement	new delete this friend using
+doc-vim-txt/usr_44.txt:syntax file.  The ":syntax include" command reads in a syntax file and stores
+doc-vim-txt/usr_44.txt::syntax include @Pod <sfile>:p:h/pod.vim
+doc-vim-txt/usr_44.txt::syntax region perlPOD start=/^=head/ end=/^=cut/ contains=@Pod
+doc-vim-txt/usr_44.txt:The ":syntax include" command is clever enough to ignore a ":syntax clear"
+doc-vim-txt/usr_44.txt:The secret is the ":syntax sync" command.  This tells Vim how to figure out
+doc-vim-txt/usr_44.txt::syntax sync ccomment
+doc-vim-txt/usr_44.txt::syntax sync ccomment minlines=10 maxlines=500
+doc-vim-txt/usr_44.txt::syntax sync ccomment xAltComment
+doc-vim-txt/usr_44.txt::syntax sync minlines=150
+doc-vim-txt/usr_44.txt::syntax sync match {sync-group-name}
+doc-vim-txt/usr_44.txt::syntax sync match shIfSync grouphere shIf "\<if\>"
+doc-vim-txt/usr_44.txt::syntax sync match shIfSync groupthere NONE "\<fi\>"
+doc-vim-txt/usr_44.txt::syntax sync match xSpecial /{.*}/
+doc-vim-txt/usr_44.txt::syntax keyword cType off_t uint
+doc-vim-txt/starting.txt:and ":syntax on" are not included.  Things like register contents and
+doc-vim-txt/usr_06.txt::syntax enable
+doc-vim-txt/usr_06.txt:If you always want to use syntax highlighting, put the ":syntax enable"
+doc-vim-txt/usr_06.txt:If you want syntax highlighting only in the GUI version, put the ":syntax
+doc-vim-txt/usr_06.txt:Make sure you put this _before_ the ":syntax enable" command,
+doc-vim-txt/usr_06.txt:":syntax reset" after setting 'background' to make Vim set the default
+doc-vim-txt/usr_06.txt::syntax clear
+doc-vim-txt/usr_06.txt::syntax off
+doc-vim-txt/usr_06.txt:all buffers.  See |:syntax-off| for more details.
+doc-vim-txt/usr_06.txt::syntax manual
+doc-vim-txt/quickref.txt:|:syn-on|	:syntax on		start using syntax highlighting
+doc-vim-txt/quickref.txt:|:syn-off|	:syntax off		stop using syntax highlighting
+doc-vim-txt/quickref.txt:|:syn-keyword|	:syntax keyword {group-name} {keyword} ..
+doc-vim-txt/quickref.txt:|:syn-match|	:syntax match {group-name} {pattern} ...
+doc-vim-txt/quickref.txt:|:syn-region|	:syntax region {group-name} {pattern} ...
+doc-vim-txt/quickref.txt:|:syn-sync|	:syntax sync [ccomment &#124; lines {N} &#124; ...]
+doc-vim-txt/quickref.txt:|:syntax|	:syntax [list]		list current syntax items
+doc-vim-txt/quickref.txt:|:syn-clear|	:syntax clear		clear all syntax info
+doc-vim-txt/cmdline.txt::syntax
+doc-vim-txt/insert.txt:":syntax list" while editing a PHP file I can see some of these entries:
+doc-vim-txt/insert.txt:SQL file (:e syntax.sql) you can use the ":syntax list" command to see the
+doc-vim-txt/ft_sql.txt::syntax list
