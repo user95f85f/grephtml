@@ -25,6 +25,7 @@ export GREPHTML_GREPPER_OPTIONS='-i'             #<--this is an example
 
 (AWKWARDNESS) USER-KNOWLEDGE ASSUMPTION:
 Replace the .txt extension with .html (in your search output) and the local files should exist within the grephtml-given '*html*' directory search-directory argument.
+For example: `grephtml blahblahblah doc-vim-html` creates directory (in the same directory) 'doc-vim-txt' and all '.html' files are translated/converted to '.txt' within the 'doc-vim-txt' directory. That 'doc-vim-txt' directory is what is "grepped."
 
 ---------------
 
